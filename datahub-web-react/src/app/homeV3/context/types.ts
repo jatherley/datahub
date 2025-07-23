@@ -20,8 +20,10 @@ export interface AddModuleInput {
 
 export interface RemoveModuleInput {
     moduleUrn: string;
+    moduleType: DataHubPageModuleType;
     position: ModulePositionInput;
 }
+
 export interface ModuleModalState {
     isOpen: boolean;
     moduleType: DataHubPageModuleType | null;

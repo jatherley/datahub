@@ -338,6 +338,7 @@ describe('useModuleOperations', () => {
 
             const removeModuleInput = {
                 moduleUrn: 'urn:li:pageModule:1',
+                moduleType: DataHubPageModuleType.Link,
                 position,
             };
 
@@ -389,6 +390,7 @@ describe('useModuleOperations', () => {
 
             const removeModuleInput = {
                 moduleUrn: 'urn:li:pageModule:2',
+                moduleType: DataHubPageModuleType.Link,
                 position,
             };
 
@@ -440,6 +442,7 @@ describe('useModuleOperations', () => {
 
             const removeModuleInput = {
                 moduleUrn: 'urn:li:pageModule:2',
+                moduleType: DataHubPageModuleType.Link,
                 position,
             };
 
@@ -494,6 +497,7 @@ describe('useModuleOperations', () => {
 
             const removeModuleInput = {
                 moduleUrn: 'urn:li:pageModule:1',
+                moduleType: DataHubPageModuleType.Link,
                 position,
             };
 
@@ -552,6 +556,7 @@ describe('useModuleOperations', () => {
 
             const removeModuleInput = {
                 moduleUrn: '', // Invalid empty URN
+                moduleType: DataHubPageModuleType.Link,
                 position,
             };
 
@@ -592,6 +597,7 @@ describe('useModuleOperations', () => {
 
             const removeModuleInput = {
                 moduleUrn: 'urn:li:pageModule:1',
+                moduleType: DataHubPageModuleType.Link,
                 position: null as any, // Invalid null position
             };
 
@@ -638,6 +644,7 @@ describe('useModuleOperations', () => {
 
             const removeModuleInput = {
                 moduleUrn: 'urn:li:pageModule:1',
+                moduleType: DataHubPageModuleType.Link,
                 position,
             };
 
@@ -684,6 +691,7 @@ describe('useModuleOperations', () => {
 
             const removeModuleInput = {
                 moduleUrn: 'urn:li:pageModule:1',
+                moduleType: DataHubPageModuleType.Link,
                 position,
             };
 

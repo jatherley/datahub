@@ -1,6 +1,7 @@
 import { message } from 'antd';
 import { useCallback, useMemo } from 'react';
 
+import analytics, { EventType } from '@app/analytics';
 import {
     calculateAdjustedRowIndex,
     insertModuleIntoRows,
@@ -244,6 +245,13 @@ export function useModuleOperations(
 
             // Persist changes
             persistTemplateChanges(context, updatedTemplate, isPersonal, 'add module');
+
+            analytics.event({
+                type: EventType.HomePageTemplateModuleAdd,
+                templateUrn: templateToUpdate.urn,
+                moduleType: module.properties.type,
+                isPersonal,
+            });
         },
         [context, isEditingModule, updateTemplateWithModule],
     );
@@ -259,7 +267,7 @@ export function useModuleOperations(
                 return;
             }
 
-            const { moduleUrn, position } = input;
+            const { moduleUrn, position, moduleType } = input;
             const { template: templateToUpdate, isPersonal } = getTemplateToUpdate(context);
 
             if (!templateToUpdate) {
@@ -276,6 +284,13 @@ export function useModuleOperations(
 
             // Persist changes
             persistTemplateChanges(context, updatedTemplate, isPersonal, 'remove module');
+
+            analytics.event({
+                type: EventType.HomePageTemplateModuleDelete,
+                templateUrn: templateToUpdate.urn,
+                moduleType,
+                isPersonal,
+            });
         },
         [context, removeModuleFromTemplate],
     );
@@ -341,10 +356,19 @@ export function useModuleOperations(
                         },
                     };
 
+                    const { template: templateToUpdate, isPersonal } = getTemplateToUpdate(context);
+
+                    analytics.event({
+                        type: moduleInput.urn
+                            ? EventType.HomePageTemplateModuleUpdate
+                            : EventType.HomePageTemplateModuleCreate,
+                        templateUrn: templateToUpdate?.urn ?? '',
+                        moduleType: moduleFragment.properties.type,
+                        isPersonal,
+                    });
+
                     // If we created a new module to replace a global one, remove the old module first
                     if (shouldCreateNewModule && originalModuleData) {
-                        const { template: templateToUpdate, isPersonal } = getTemplateToUpdate(context);
-
                         if (!templateToUpdate) {
                             console.error('No template provided to update');
                             message.error('No template available to update');
@@ -445,6 +469,12 @@ export function useModuleOperations(
 
             // Persist changes
             persistTemplateChanges(context, updatedTemplate, isPersonal, 'move module');
+
+            analytics.event({
+                type: EventType.HomePageTemplateModuleMove,
+                templateUrn: templateToUpdate.urn,
+                isPersonal,
+            });
         },
         [context, moveModuleInTemplate],
     );

@@ -38,9 +38,10 @@ export default function ModuleMenu({ module, position }: Props) {
     const handleDelete = useCallback(() => {
         removeModule({
             moduleUrn: module.urn,
+            moduleType: module.properties.type,
             position,
         });
-    }, [removeModule, module.urn, position]);
+    }, [removeModule, module.urn, module.properties.type, position]);
 
     const handleMenuClick = useCallback((e: React.MouseEvent) => {
         e.stopPropagation();

@@ -6,7 +6,7 @@ import EntityItem from '@app/homeV3/module/components/EntityItem';
 import { EmptyContainer, StyledIcon } from '@app/homeV3/styledComponents';
 import { useGetEntities } from '@app/sharedV2/useGetEntities';
 
-import { Entity } from '@types';
+import { DataHubPageModuleType, Entity } from '@types';
 
 const SelectedAssetsContainer = styled.div`
     display: flex;
@@ -50,6 +50,7 @@ const SelectedAssetsSection = ({ selectedAssetUrns, setSelectedAssetUrns }: Prop
                 entity={entity}
                 key={entity.urn}
                 customDetailsRenderer={renderRemoveAsset}
+                moduleType={DataHubPageModuleType.AssetCollection}
                 navigateOnlyOnNameClick
             />
         ));

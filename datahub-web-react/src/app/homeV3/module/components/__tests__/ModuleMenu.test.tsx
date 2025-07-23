@@ -83,6 +83,7 @@ describe('ModuleMenu', () => {
         // Verify that removeModule was called with correct parameters
         expect(mockRemoveModule).toHaveBeenCalledWith({
             moduleUrn: 'urn:li:dataHubPageModule:test',
+            moduleType: DataHubPageModuleType.Link,
             position: mockPosition,
         });
     });
@@ -117,6 +118,7 @@ describe('ModuleMenu', () => {
         // Verify that removeModule was called with correct parameters
         expect(mockRemoveModule).toHaveBeenCalledWith({
             moduleUrn: 'urn:li:dataHubPageModule:domains',
+            moduleType: DataHubPageModuleType.Domains,
             position: differentPosition,
         });
     });
@@ -154,6 +156,7 @@ describe('ModuleMenu', () => {
         // Verify that removeModule was called with moduleIndex
         expect(mockRemoveModule).toHaveBeenCalledWith({
             moduleUrn: 'urn:li:dataHubPageModule:test',
+            moduleType: DataHubPageModuleType.Link,
             position: positionWithModuleIndex,
         });
     });
@@ -183,6 +186,7 @@ describe('ModuleMenu', () => {
         // Verify that removeModule was called with correct URN
         expect(mockRemoveModule).toHaveBeenCalledWith({
             moduleUrn: 'urn:li:dataHubPageModule:veryLongName',
+            moduleType: DataHubPageModuleType.OwnedAssets,
             position: mockPosition,
         });
     });
@@ -206,6 +210,7 @@ describe('ModuleMenu', () => {
         // Verify that removeModule was called with minimal position
         expect(mockRemoveModule).toHaveBeenCalledWith({
             moduleUrn: 'urn:li:dataHubPageModule:test',
+            moduleType: DataHubPageModuleType.Link,
             position: minimalPosition,
         });
     });
@@ -235,6 +240,7 @@ describe('ModuleMenu', () => {
         // Verify that removeModule was called with special character URN
         expect(mockRemoveModule).toHaveBeenCalledWith({
             moduleUrn: 'urn:li:dataHubPageModule:test-module_with.special+chars',
+            moduleType: DataHubPageModuleType.Link,
             position: mockPosition,
         });
     });
@@ -278,6 +284,7 @@ describe('ModuleMenu', () => {
         expect(mockRemoveModule).toHaveBeenCalledTimes(3);
         expect(mockRemoveModule).toHaveBeenCalledWith({
             moduleUrn: 'urn:li:dataHubPageModule:test',
+            moduleType: DataHubPageModuleType.Link,
             position: mockPosition,
         });
     });

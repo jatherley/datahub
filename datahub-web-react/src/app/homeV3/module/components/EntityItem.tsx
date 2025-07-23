@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
+import analytics, { EventType } from '@app/analytics';
 import AutoCompleteEntityItem from '@app/searchV2/autoCompleteV2/AutoCompleteEntityItem';
 import { useEntityRegistryV2 } from '@app/useEntityRegistry';
 
-import { Entity } from '@types';
+import { DataHubPageModuleType, Entity } from '@types';
 
 const StyledLink = styled(Link)`
     width: 100%;
@@ -13,6 +14,7 @@ const StyledLink = styled(Link)`
 
 interface Props {
     entity: Entity;
+    moduleType: DataHubPageModuleType;
     customDetailsRenderer?: (entity: Entity) => void;
     navigateOnlyOnNameClick?: boolean;
     hideSubtitle?: boolean;
@@ -22,6 +24,7 @@ interface Props {
 
 export default function EntityItem({
     entity,
+    moduleType,
     customDetailsRenderer,
     navigateOnlyOnNameClick = false,
     hideSubtitle,
@@ -29,6 +32,17 @@ export default function EntityItem({
     padding,
 }: Props) {
     const entityRegistry = useEntityRegistryV2();
+
+    // TODO: should we add when navigateOnlyOnNameClick is true?
+    const sendAnalytics = useCallback(
+        () =>
+            analytics.event({
+                type: EventType.HomePageTemplateModuleAssetClick,
+                moduleType,
+                assetUrn: entity.urn,
+            }),
+        [entity.urn, moduleType],
+    );
 
     return (
         <>
@@ -43,7 +57,7 @@ export default function EntityItem({
                     navigateOnlyOnNameClick
                 />
             ) : (
-                <StyledLink to={entityRegistry.getEntityUrl(entity.type, entity.urn)}>
+                <StyledLink to={entityRegistry.getEntityUrl(entity.type, entity.urn)} onClick={sendAnalytics}>
                     <AutoCompleteEntityItem
                         entity={entity}
                         key={entity.urn}
